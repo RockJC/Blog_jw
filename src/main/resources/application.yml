@@ -1,0 +1,14 @@
+spring:
+  thymeleaf:
+    mode: HTML
+  profiles:
+    active: dev
+
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: t_
+      id-type: auto
+  configuration:
+    map-underscore-to-camel-case: false
+  type-aliases-package: com.awei.entity

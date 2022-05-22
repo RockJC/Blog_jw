@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.mapper.TypeMapper">
+
+    <select id="TypeListIndex" resultMap="TypeIndexMap">
+        SELECT ref_type_id,t_type.type_name,COUNT(id)
+        FROM t_blog
+        LEFT JOIN t_type ON t_blog.ref_type_id = t_type.type_id
+        GROUP BY ref_type_id ORDER BY COUNT(id) DESC
+    </select>
+    <resultMap id="TypeIndexMap" type="com.awei.entity.Type">
+        <id property="typeid" column="type_id"/>
+        <result property="typename" column="type_name"/>
+        <result property="size" column="count(id)" javaType="java.lang.Integer"/>
+    </resultMap>
+</mapper>
