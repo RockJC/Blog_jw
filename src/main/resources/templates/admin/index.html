@@ -20,8 +20,8 @@
             <div class="right m-item m-mobile-hide menu">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img class="ui avatar image" th:src="${session.user?.avatar}">
-                        <span th:text="${session.user?.nickname}">姜伟</span>
+                        <img class="ui avatar image" th:src="${session.user?.userAvatar}">
+                        <span th:text="${session.user?.userNickname}">姜伟</span>
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -41,7 +41,7 @@
     <div class="ui container">
         <div class="ui success large message">
             <h2>Hi!</h2>
-            <p><i th:text="${session.user?.username}"></i>欢迎登录！</p>
+            <p><i th:text="${session.user?.userName}"></i>欢迎登录！</p>
         </div>
     </div>
 </div>

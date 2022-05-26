@@ -1,8 +1,5 @@
 package com.awei.service;
 
-import com.awei.entity.Comment;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 /**
  * <p>
  *  服务类

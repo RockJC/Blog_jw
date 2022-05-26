@@ -29,7 +29,7 @@ public class loginController {
     public ModelAndView login(@RequestParam String username, @RequestParam String password, HttpSession session, RedirectAttributes attributes){
         User user = userService.checkLogin(username,password);
         if (user != null){
-            user.setPassword(null);
+            user.setUserPassword(null);
             session.setAttribute("user",user);
             return new ModelAndView("admin/index");
         }else {

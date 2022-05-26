@@ -20,8 +20,8 @@
             <div class="right m-item m-mobile-hide menu">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img class="ui avatar image" th:src="${session.user?.avatar}">
-                        <span th:text="${session.user?.nickname}">姜伟</span>
+                        <img class="ui avatar image" th:src="${session.userAvatar}">
+                        <span th:text="${session.user?.userNickname}">姜伟</span>
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -59,7 +59,7 @@
                             <i class="dropdown icon"></i>
                             <div class="default text">分类</div>
                             <div class="menu">
-                                <div th:each="types : ${types}" class="item" data-value="1" th:data-value="${types.typeid}" th:text="${types.typename}">错误日志</div>
+                                <div th:each="types : ${types}" class="item" data-value="1" th:data-value="${types.typeId}" th:text="${types.typeName}">错误日志</div>
                             </div>
                     </div>
                         <button id="clear-btn" class="ui compat button">clear</button>
@@ -92,14 +92,14 @@
             <tbody>
             <tr th:each="blog,iterStat : ${page.records}">
                 <td th:text="${iterStat.count}">1</td>
-                <td th:text="${blog.title}">练习清单</td>
-                <td th:text="${blog.type.typename}">认知升级</td>
-                <td th:text="${blog.recommend} ? '是':'否'">是</td>
-                <td th:text="${blog.published} ? '发布':'草稿'">草稿</td>
-                <td th:text="${blog.update_time}">2022-3-28 09:45</td>
+                <td th:text="${blog.blogTitle}">练习清单</td>
+                <td th:text="${blog.type.typeName}">认知升级</td>
+                <td th:text="${blog.blogRecommend} ? '是':'否'">是</td>
+                <td th:text="${blog.blogPublished} ? '发布':'草稿'">草稿</td>
+                <td th:text="${blog.blogUpdtime}">2022-3-28 09:45</td>
                 <td>
-                    <a href="#" th:href="@{/user/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
-                    <a href="#" th:href="@{/user/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
+                    <a href="#" th:href="@{/user/blogs/{id}/input(id=${blog.blogId})}" class="ui mini teal basic button">编辑</a>
+                    <a href="#" th:href="@{/user/blogs/{id}/delete(id=${blog.blogId})}" class="ui mini red basic button">删除</a>
                 </td>
             </tr>
             </tbody>

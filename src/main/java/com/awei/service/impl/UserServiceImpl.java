@@ -24,8 +24,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User checkLogin(String username, String password) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username",username)
-                        .eq("password", MD5Utils.code(password));
+        queryWrapper.eq("user_name",username)
+                        .eq("user_password", MD5Utils.code(password));
         User u1 = userMapper.selectOne(queryWrapper);
         return u1;
     }
