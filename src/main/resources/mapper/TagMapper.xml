@@ -2,15 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awei.mapper.TagMapper">
     <select id="TagListIndex" resultMap="TagIndexMap">
-        SELECT t.tag_id,t.tag_name,COUNT(id)
+        SELECT t.tag_id,t.tag_name,COUNT(*)
         FROM t_blogtag b
-                 LEFT JOIN t_tag t ON b.tag_id = t.tag_id
-        GROUP BY t.tag_id ORDER BY COUNT(id) DESC
+                 LEFT JOIN t_tag t ON b.ref_tag_id = t.tag_id
+        GROUP BY t.tag_id ORDER BY COUNT(*) DESC
     </select>
     <resultMap id="TagIndexMap" type="com.awei.entity.Tag">
-        <id property="tagid" column="tag_id"/>
-        <result property="tagname" column="tag_name"/>
-
-        <result property="size" column="count(id)" javaType="java.lang.Integer"/>
+        <id property="tagId" column="tag_id"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="size" column="count(*)" javaType="java.lang.Integer"/>
     </resultMap>
 </mapper>

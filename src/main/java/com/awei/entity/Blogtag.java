@@ -23,22 +23,26 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_blogtag")
 public class Blogtag implements Serializable {
+    /**
+     * 对应关系-博客ID
+     */
+    @TableField(value = "ref_blog_id")
+    private Long refBlogId;
 
+    /**
+     * 对应关系-标签ID
+     */
+    @TableField(value = "ref_tag_id")
+    private Integer refTagId;
+
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-
-    private Long blog_id;
-
-    private Long tag_id;
 
     @TableField(exist = false)
     private Tag tag;
 
-    public Blogtag(Long id, Long blog_id, Long tag_id) {
-        this.id = id;
-        this.blog_id = blog_id;
-        this.tag_id = tag_id;
+    public Blogtag(Long blog_id, Integer tag_id) {
+        this.refBlogId = blog_id;
+        this.refTagId = tag_id;
     }
 }

@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Transactional
 @Service
-public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagService {
+public class TagServiceImpl implements ITagService {
     @Autowired
     private TagMapper tagMapper;
 
@@ -42,7 +42,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
     }
 
     @Override
-    public Tag getTag(Long tagid) {
+    public Tag getTag(Integer tagid) {
         return tagMapper.selectById(tagid);
     }
 
@@ -61,7 +61,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
     }
 
     @Override
-    public Tag updateTag(Long tagid, Tag tag) {
+    public Tag updateTag(Integer tagid, Tag tag) {
         Tag t = tagMapper.selectById(tagid);
         if (t == null){
             throw new NotFoundException("不存在该标签");
@@ -73,7 +73,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
     }
 
     @Override
-    public int deleteTag(Long tagid) {
+    public int deleteTag(Integer tagid) {
         int i = tagMapper.deleteById(tagid);
         return i;
     }
@@ -84,8 +84,8 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
     }
 
     @Override
-    public List<Long> listTagById(String ids) {
-        List<Long> longlist = convertList(ids);
+    public List<Integer> listTagById(String ids) {
+        List<Integer> longlist = convertList(ids);
 //        return tagMapper.selectBatchIds(longlist);
         return longlist;
     }
@@ -96,13 +96,13 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
         return tagMapper.TagListIndex(page);
     }
 
-    private List<Long> convertList(String ids){
+    private List<Integer> convertList(String ids){
         System.out.println(ids);
-        List<Long> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         if (StringUtils.hasText(ids)){
             String[] idarray = ids.split(",");
             for (int i=0;i<idarray.length;i++){
-                list.add(Long.parseLong(idarray[i]));
+                list.add(Integer.parseInt(idarray[i]));
             }
         }
         return list;

@@ -25,7 +25,7 @@ import java.sql.Timestamp;
  */
 @Transactional
 @Service
-public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IBlogService {
+public class BlogServiceImpl implements IBlogService {
 
     @Autowired
     private BlogMapper blogMapper;
@@ -52,16 +52,16 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
 
     @Override
     public Integer saveBlog(Blog blog) {
-        System.out.println(blog.getFlag());
-        if (blog.getFlag()==null||"".equals(blog.getFlag())){blog.setFlag("原创");}
-        if (blog.getId()==null){
-            blog.setCreate_time(new Timestamp(System.currentTimeMillis()));
-            blog.setUpdate_time(new Timestamp(System.currentTimeMillis()));
-            blog.setViews(0);
+        System.out.println(blog.getBlogFlag());
+        if (blog.getBlogFlag()==null||"".equals(blog.getBlogFlag())){blog.setBlogFlag("原创");}
+        if (blog.getBlogId()==null){
+            blog.setBlogCretime(new Timestamp(System.currentTimeMillis()));
+            blog.setBlogUpdtime(new Timestamp(System.currentTimeMillis()));
+            blog.setBlogViews(0);
             blogMapper.insert(blog);
             return 0;
         }else{
-            blog.setUpdate_time(new Timestamp(System.currentTimeMillis()));
+            blog.setBlogUpdtime(new Timestamp(System.currentTimeMillis()));
             blogMapper.updateById(blog);
             return 1;
         }
@@ -84,14 +84,14 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
         if (blog == null){
             throw new NotFoundException("该博客不存在");
         }
-        String content = blog.getContent();
-        blog.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        String content = blog.getBlogContent();
+        blog.setBlogContent(MarkdownUtils.markdownToHtmlExtensions(content));
         return blog;
     }
 
     @Override
     public String getBlogTitle(Long id) {
-       return blogMapper.selectById(id).getTitle();
+       return blogMapper.selectById(id).getBlogTitle();
     }
 
     @Override

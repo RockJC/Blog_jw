@@ -17,7 +17,7 @@ import java.util.List;
  * @author jiangwei
  * @since 2022-05-01
  */
-public interface IBlogService extends IService<Blog> {
+public interface IBlogService {
 
     Object listBlog(Integer num, BlogQuery blog);
 

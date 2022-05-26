@@ -3,14 +3,14 @@
 <mapper namespace="com.awei.mapper.TypeMapper">
 
     <select id="TypeListIndex" resultMap="TypeIndexMap">
-        SELECT ref_type_id,t_type.type_name,COUNT(id)
+        SELECT blog_ref_typeid,t_type.type_name,COUNT(blog_id)
         FROM t_blog
-        LEFT JOIN t_type ON t_blog.ref_type_id = t_type.type_id
-        GROUP BY ref_type_id ORDER BY COUNT(id) DESC
+        LEFT JOIN t_type ON t_blog.blog_ref_typeid = t_type.type_id
+        GROUP BY blog_ref_typeid ORDER BY COUNT(blog_id) DESC
     </select>
     <resultMap id="TypeIndexMap" type="com.awei.entity.Type">
-        <id property="typeid" column="type_id"/>
-        <result property="typename" column="type_name"/>
-        <result property="size" column="count(id)" javaType="java.lang.Integer"/>
+        <id property="typeId" column="type_id"/>
+        <result property="typeName" column="type_name"/>
+        <result property="size" column="count(blog_id)" javaType="java.lang.Integer"/>
     </resultMap>
 </mapper>

@@ -49,7 +49,7 @@ public class TagController {
     }
 
     @RequestMapping("/tags/{tagid}/input")
-    public ModelAndView editInput(@PathVariable Long tagid, ModelAndView modelAndView) {
+    public ModelAndView editInput(@PathVariable Integer tagid, ModelAndView modelAndView) {
         modelAndView.addObject("tag", tagService.getTag(tagid));
         modelAndView.setViewName("admin/tag-input");
         return modelAndView;
@@ -58,7 +58,7 @@ public class TagController {
     @RequestMapping("/tags/save")
     public ModelAndView save(@Valid Tag tag, BindingResult result,
                              ModelAndView modelAndView, RedirectAttributes attributes) {
-        Tag tag1 = tagService.getTagByName(tag.getTagname());
+        Tag tag1 = tagService.getTagByName(tag.getTagName());
         if (tag1 != null) {
             result.rejectValue("tagname", "nameError", "不能添加重复信息");
         }
@@ -77,8 +77,8 @@ public class TagController {
     }
     @RequestMapping("/tags/{tagid}")
     public ModelAndView edit(@Valid Tag tag,BindingResult result,
-                             @PathVariable Long tagid, ModelAndView modelAndView, RedirectAttributes attributes) {
-        Tag tag1 = tagService.getTagByName(tag.getTagname());
+                             @PathVariable Integer tagid, ModelAndView modelAndView, RedirectAttributes attributes) {
+        Tag tag1 = tagService.getTagByName(tag.getTagName());
         if (tag1 != null) {
             result.rejectValue("tagname", "nameError", "不能添加重复信息");
         }
@@ -96,7 +96,7 @@ public class TagController {
         return modelAndView;
     }
     @RequestMapping("/tags/{tagid}/delete")
-    public ModelAndView delete(@PathVariable Long tagid, ModelAndView modelAndView, RedirectAttributes attributes){
+    public ModelAndView delete(@PathVariable Integer tagid, ModelAndView modelAndView, RedirectAttributes attributes){
         int i = tagService.deleteTag(tagid);
         if (i < 1){
             attributes.addFlashAttribute("message", "删除失败");

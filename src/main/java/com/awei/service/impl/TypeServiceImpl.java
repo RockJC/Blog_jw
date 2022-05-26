@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Transactional
 @Service
-public class TypeServiceImpl extends ServiceImpl<TypeMapper, Type> implements ITypeService {
+public class TypeServiceImpl implements ITypeService {
     @Autowired
     private TypeMapper typeMapper;
     @Autowired

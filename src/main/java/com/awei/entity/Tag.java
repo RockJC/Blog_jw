@@ -5,13 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.github.dreamyoung.mprelation.InverseJoinColumn;
-import com.github.dreamyoung.mprelation.JoinColumn;
-import com.github.dreamyoung.mprelation.JoinTable;
-import com.github.dreamyoung.mprelation.ManyToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,14 +22,21 @@ import org.hibernate.validator.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_tag")
 public class Tag implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+    /**
+     * 标签ID
+     */
     @TableId(value = "tag_id", type = IdType.AUTO)
-    private Long tagid;
+    private Integer tagId;
+
+    /**
+     * 标签名称
+     */
     @TableField(value = "tag_name")
     @NotBlank(message = "标签名称不能为空")
-    private String tagname;
+    private String tagName;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
     @TableField(exist = false)
     private List<Blog> blogs;

@@ -77,7 +77,7 @@ public class BlogController {
         modelAndView.addObject("types",typeService.listAllType());
         modelAndView.addObject("tags",tagService.listAllTag());
         Blog blog1 = blogService.getDetailBlog(id);
-        blog1.setTitle(blogService.getBlogTitle(id));
+        blog1.setBlogTitle(blogService.getBlogTitle(id));
         List<Blogtag> blogtags = blog1.getBlogtags();
         List<Tag> tagList = new ArrayList<>();
         for (Blogtag bt : blogtags){
@@ -93,15 +93,15 @@ public class BlogController {
     @RequestMapping("/blogs/insert")
     public ModelAndView post(Blog blog, HttpSession session, RedirectAttributes attributes, ModelAndView modelAndView){
         User u1 = (User) session.getAttribute("user");
-        blog.setUser_id(u1.getUserid());
-        blog.setType_id(blog.getType().getTypeid());
-        List<Long> longs = tagService.listTagById(blog.getTagIds());
+        blog.setUser_id(u1.getUserId());
+        blog.setType_id(blog.getType().getTypeId());
+        List<Integer> longs = tagService.listTagById(blog.getTagIds());
         System.out.println(longs);
         int i;
         if (blogService.saveBlog(blog)==0){
-            i = blogTagService.insertListTags(blog.getId(), longs);
+            i = blogTagService.insertListTags(blog.getBlogId(), longs);
         }else {
-            i = blogTagService.updateListByBlogId(blog.getId(), longs);
+            i = blogTagService.updateListByBlogId(blog.getBlogId(), longs);
         }
         if (i < 1){
             attributes.addFlashAttribute("message","操作失败");

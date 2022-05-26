@@ -26,7 +26,7 @@ public class CommentController {
     }
     @RequestMapping("/comments")
     public ModelAndView post(Comment comment,ModelAndView modelAndView) {
-        modelAndView.setViewName("redirect:/comments" + comment.getBlog_id());
+        modelAndView.setViewName("redirect:/comments" + comment.getCommentBlogid());
         return modelAndView;
     }
 }

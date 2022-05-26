@@ -13,7 +13,7 @@ import java.util.List;
  * @author jiangwei
  * @since 2022-05-03
  */
-public interface IBlogtagService extends IService<Blogtag> {
-    int insertListTags(Long blogid, List<Long> tagIds);
-    int updateListByBlogId(Long blogid,List<Long> tagIds);
+public interface IBlogtagService{
+    int insertListTags(Long blogid, List<Integer> tagIds);
+    int updateListByBlogId(Long blogid,List<Integer> tagIds);
 }

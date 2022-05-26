@@ -13,22 +13,22 @@ import java.util.List;
  * @author jiangwei
  * @since 2022-05-01
  */
-public interface ITagService extends IService<Tag> {
+public interface ITagService{
     Tag saveTag(Tag tag);
 
-    Tag getTag(Long tagid);
+    Tag getTag(Integer tagid);
 
     Tag getTagByName(String name);
 
     Object listTag(Integer num);
 
-    Tag updateTag(Long tagid, Tag tag);
+    Tag updateTag(Integer tagid, Tag tag);
 
-    int deleteTag(Long tagid);
+    int deleteTag(Integer tagid);
 
     List<Tag> listAllTag();
 
-    List<Long> listTagById(String ids);
+    List<Integer> listTagById(String ids);
 
     Object listTagTop(Integer num);
 }

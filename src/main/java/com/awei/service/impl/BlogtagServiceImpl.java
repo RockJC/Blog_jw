@@ -23,21 +23,21 @@ import java.util.List;
  */
 @Transactional
 @Service
-public class BlogtagServiceImpl extends ServiceImpl<BlogtagMapper, Blogtag> implements IBlogtagService {
+public class BlogtagServiceImpl implements IBlogtagService {
     @Autowired
     private BlogtagMapper blogTagMapper;
 
     @Override
-    public int insertListTags(Long blogid, List<Long> tagIds) {
-        Iterator<Long> l=tagIds.iterator();
+    public int insertListTags(Long blogid, List<Integer> tagIds) {
+        Iterator<Integer> l=tagIds.iterator();
         while (l.hasNext()){
-            blogTagMapper.insert(new Blogtag(null,blogid,l.next()));
+            blogTagMapper.insert(new Blogtag(blogid,l.next()));
         }
         return tagIds.size();
     }
 
     @Override
-    public int updateListByBlogId(Long blogsid,List<Long> tagsIds) {
+    public int updateListByBlogId(Long blogsid,List<Integer> tagsIds) {
         QueryWrapper queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("blog_id",blogsid);
         blogTagMapper.delete(queryWrapper);

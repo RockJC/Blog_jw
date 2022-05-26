@@ -4,33 +4,35 @@
 
     <select id="BlogListPage" resultMap="BlogResultMap">
         SELECT
-            b.id, b.title, b.recommend, b.published, b.update_time, b.ref_type_id, t.type_id, t.type_name
+            b.blog_id, b.blog_title, b.blog_recommend, b.blog_published, b.blog_updtime, b.blog_ref_typeid, t.type_id, t.type_name
         FROM
             t_blog b
-            inner JOIN t_type t ON b.ref_type_id = t.type_id
+            inner JOIN t_type t ON b.blog_ref_typeid = t.type_id
         <if test="ew !=null">
             ${ew.customSqlSegment}
         </if>
     </select>
     <select id="BlogUpdateDetail" resultMap="BlogAllMap">
         select
-            b.id,b.appreciation,b.commentabled,b.content,b.description,
-            b.first_picture,b.flag,b.recommend,b.share_statement,
-            b.update_time,b.views,b.ref_type_id,b.ref_user_id,d.type_id,d.type_name,c.tag_id,c.tag_name
+            b.blog_id,b.blog_appreciation,b.blog_commentabled,b.blog_content,b.blog_descri,
+            b.blog_firstpic,b.blog_flag,b.blog_recommend,b.blog_statement,
+            b.blog_updtime,b.blog_views,b.blog_ref_typeid,b.blog_ref_userid,d.type_id,d.type_name,c.tag_id,c.tag_name
         from
             (t_blog b
-            inner JOIN t_type d ON b.ref_type_id = d.type_id)
-            inner JOIN t_blogtag a ON b.id = a.blog_id
-            LEFT JOIN t_tag c ON c.tag_id = a.tag_id
-            where b.id = #{id}
+            inner JOIN t_type d ON b.blog_ref_typeid = d.type_id)
+            inner JOIN t_blogtag a ON b.blog_id = a.ref_blog_id
+            LEFT JOIN t_tag c ON c.tag_id = a.ref_tag_id
+            where b.blog_id = #{id}
     </select>
     <select id="BlogListIndex" resultMap="BlogIndexMap">
         SELECT
-            b.id, b.title,b.description,b.first_picture, b.flag, b.published,b.recommend, b.update_time, b.views, b.ref_type_id, t.type_id, t.type_name,u.userid,u.avatar,u.nickname
+            b.blog_id, b.blog_title, b.blog_descri, b.blog_firstpic, b.blog_flag, b.blog_published,
+            b.blog_recommend, b.blog_updtime, b.blog_views, b.blog_ref_typeid, t.type_id, t.type_name,
+            u.user_id, u.user_avatar, u.user_nickname
         FROM
             t_blog b
-            inner JOIN t_type t ON b.ref_type_id = t.type_id
-            inner JOIN t_user u ON b.ref_user_id = u.userid
+            inner JOIN t_type t ON b.blog_ref_typeid = t.type_id
+            inner JOIN t_user u ON b.blog_ref_userid = u.user_id
         <if test="ew !=null">
                 ${ew.customSqlSegment}
         </if>
@@ -38,65 +40,65 @@
     <select id="BlogListIndexByTime" resultType="com.awei.entity.Blog">
         SELECT *
         FROM t_blog b
-        WHERE b.recommend = TRUE
-        ORDER BY b.update_time DESC
+        WHERE b.blog_recommend = TRUE
+        ORDER BY b.blog_updtime DESC
     </select>
     <resultMap id="BlogResultMap" type="com.awei.entity.Blog">
-        <id property="id" column="id"/>
-        <result property="title" column="title"/>
-        <result property="recommend" column="recommend"/>
-        <result property="published" column="published"/>
-        <result property="update_time" column="update_time"/>
-        <result property="type_id" column="ref_type_id"/>
+        <id property="blogId" column="blog_id"/>
+        <result property="blogTitle" column="blog_title"/>
+        <result property="blogRecommend" column="blog_recommend"/>
+        <result property="blogPublished" column="blog_published"/>
+        <result property="blogUpdtime" column="blog_updtime"/>
+        <result property="type_id" column="blog_ref_typeid"/>
         <association property="type" javaType="com.awei.entity.Type">
-            <id property="typeid" column="type_id"/>
-            <result property="typename" column="type_name"/>
+            <id property="typeId" column="type_id"/>
+            <result property="typeName" column="type_name"/>
         </association>
     </resultMap>
     <resultMap id="BlogAllMap" type="com.awei.entity.Blog">
-        <id property="id" column="id"/>
-        <result property="appreciation" column="appreciation"/>
-        <result property="commentabled" column="commentabled"/>
-        <result property="content" column="content"/>
-        <result property="description" column="description"/>
-        <result property="firstPicture" column="first_picture"/>
-        <result property="flag" column="flag"/>
-        <result property="recommend" column="recommend"/>
-        <result property="shareStatement" column="share_statement"/>
-        <result property="update_time" column="update_time"/>
-        <result property="views" column="views"/>
-        <result property="type_id" column="ref_type_id"/>
-        <result property="user_id" column="ref_user_id"/>
+        <id property="blogId" column="blog_id"/>
+        <result property="blogAppreciation" column="blog_appreciation"/>
+        <result property="blogCommentabled" column="blog_commentabled"/>
+        <result property="blogContent" column="blog_content"/>
+        <result property="blogDescri" column="blog_descri"/>
+        <result property="blogFirstpic" column="blog_firstpic"/>
+        <result property="blogFlag" column="blog_flag"/>
+        <result property="blogRecommend" column="blog_recommend"/>
+        <result property="blogStatement" column="blog_statement"/>
+        <result property="blogUpdtime" column="blog_updtime"/>
+        <result property="blogViews" column="blog_views"/>
+        <result property="type_id" column="blog_ref_typeid"/>
+        <result property="user_id" column="blog_ref_userid"/>
         <association property="type" javaType="com.awei.entity.Type">
-            <id property="typeid" column="type_id"/>
-            <result property="typename" column="type_name"/>
+            <id property="typeId" column="type_id"/>
+            <result property="typeName" column="type_name"/>
         </association>
         <collection property="blogtags" ofType="com.awei.entity.Blogtag">
             <association property="tag" javaType="com.awei.entity.Tag">
-                <id property="tagid" column="tag_id"/>
-                <result property="tagname" column="tag_name"/>
+                <id property="tagId" column="tag_id"/>
+                <result property="tagName" column="tag_name"/>
             </association>
         </collection>
     </resultMap>
     <resultMap id="BlogIndexMap" type="com.awei.entity.Blog">
-        <id property="id" column="id"/>
-        <result property="title" column="title"/>
-        <result property="description" column="description"/>
-        <result property="firstPicture" column="first_picture"/>
-        <result property="flag" column="flag"/>
-        <result property="published" column="published"/>
-        <result property="recommend" column="recommend"/>
-        <result property="update_time" column="update_time"/>
-        <result property="views" column="views"/>
-        <result property="type_id" column="ref_type_id"/>
+        <id property="blogId" column="blog_id"/>
+        <result property="blogTitle" column="blog_title"/>
+        <result property="blogDescri" column="blog_descri"/>
+        <result property="blogFirstpic" column="blog_firstpic"/>
+        <result property="blogFlag" column="blog_flag"/>
+        <result property="blogPublished" column="blog_published"/>
+        <result property="blogRecommend" column="blog_recommend"/>
+        <result property="blogUpdtime" column="blog_updtime"/>
+        <result property="blogViews" column="blog_views"/>
+        <result property="type_id" column="blog_ref_typeid"/>
         <association property="type" javaType="com.awei.entity.Type">
-            <id property="typeid" column="type_id"/>
-            <result property="typename" column="type_name"/>
+            <id property="typeId" column="type_id"/>
+            <result property="typeName" column="type_name"/>
         </association>
         <association property="user" javaType="com.awei.entity.User">
-            <id property="userid" column="userid"/>
-            <result property="avatar" column="avatar"/>
-            <result property="nickname" column="nickname"/>
+            <id property="userId" column="user_id"/>
+            <result property="userAvatar" column="user_avatar"/>
+            <result property="userNickname" column="user_nickname"/>
         </association>
     </resultMap>
 </mapper>

@@ -26,15 +26,21 @@ import org.hibernate.validator.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_type")
 public class Type implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+    /**
+     * 类型ID
+     */
     @TableId(value = "type_id", type = IdType.AUTO)
-    private Long typeid;
+    private Integer typeId;
 
+    /**
+     * 类型名称
+     */
     @TableField(value = "type_name")
     @NotBlank(message = "分类名称不能为空")
-    private String typename;
+    private String typeName;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
     @TableField(exist = false)
     private List<Blog> blogs;

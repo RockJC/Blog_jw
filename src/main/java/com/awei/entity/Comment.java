@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.github.dreamyoung.mprelation.JoinColumn;
@@ -27,25 +28,56 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_comment")
 public class Comment implements Serializable {
+    /**
+     * 评论ID
+     */
+    @TableId(value = "comment_id", type = IdType.AUTO)
+    private Long commentId;
 
+    /**
+     * 评论用户昵称
+     */
+    @TableField(value = "comment_nickname")
+    private String commentNickname;
+
+    /**
+     * 评论用户邮箱
+     */
+    @TableField(value = "comment_email")
+    private String commentEmail;
+
+    /**
+     * 评论内容
+     */
+    @TableField(value = "comment_content")
+    private String commentContent;
+
+    /**
+     * 评论用户头像
+     */
+    @TableField(value = "comment_avatar")
+    private String commentAvatar;
+
+    /**
+     * 评论时间
+     */
+    @TableField(value = "comment_cretime")
+    private Date commentCretime;
+
+    /**
+     * 评论对应blog
+     */
+    @TableField(value = "comment_blogid")
+    private Long commentBlogid;
+
+    /**
+     * 评论父类
+     */
+    @TableField(value = "comment_parentid")
+    private Long commentParentid;
+
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-
-    private String nickname;
-
-    private String email;
-
-    private String content;
-
-    private String avatar;
-
-    private LocalDateTime create_time;
-
-    private Long blog_id;
-
-    private Long parent_comment_id;
 
     @TableField(exist = false)
     private com.awei.entity.Comment parentComment;

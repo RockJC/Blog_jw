@@ -16,7 +16,7 @@ import java.util.Map;
  * @author jiangwei
  * @since 2022-05-01
  */
-public interface ITypeService extends IService<Type> {
+public interface ITypeService{
     Type saveType(Type type);
 
     Type getType(Long id);

@@ -59,7 +59,7 @@ public class TypeController {
     @RequestMapping("/types/save")
     public ModelAndView save(@Valid Type type, BindingResult result,
                              ModelAndView modelAndView, RedirectAttributes attributes) {
-        Type type1 = typeService.getTypeByName(type.getTypename());
+        Type type1 = typeService.getTypeByName(type.getTypeName());
         if (type1 != null) {
             result.rejectValue("typename", "nameError", "不能添加重复信息");
         }
@@ -80,7 +80,7 @@ public class TypeController {
     @RequestMapping("/types/{typeid}")
     public ModelAndView edit(@Valid Type type, BindingResult result,
                              @PathVariable Long typeid, ModelAndView modelAndView, RedirectAttributes attributes) {
-        Type type1 = typeService.getTypeByName(type.getTypename());
+        Type type1 = typeService.getTypeByName(type.getTypeName());
         if (type1 != null) {
             result.rejectValue("typename", "nameError", "不能添加重复信息");
         }

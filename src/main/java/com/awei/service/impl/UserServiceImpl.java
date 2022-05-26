@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-05-01
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
     @Override
@@ -31,7 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(Short id) {
         return userMapper.selectById(id);
     }
 
