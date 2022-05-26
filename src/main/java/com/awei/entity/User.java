@@ -50,7 +50,7 @@ public class User implements Serializable {
     /**
      * 用户账户生成日期
      */
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField(value = "user_cretime")
     private Date userCretime;
@@ -82,7 +82,7 @@ public class User implements Serializable {
     /**
      * 用户账户更新日期
      */
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField(value = "user_updtime")
     private Date userUpdtime;

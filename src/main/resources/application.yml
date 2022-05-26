@@ -3,6 +3,10 @@ spring:
     mode: HTML
   profiles:
     active: dev
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
 
 mybatis-plus:
   global-config:

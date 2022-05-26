@@ -7,11 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -60,7 +60,8 @@ public class Blog implements Serializable {
     /**
      * 创建时间
      */
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField(value = "blog_cretime")
     private Date blogCretime;
 
@@ -103,6 +104,8 @@ public class Blog implements Serializable {
     /**
      * 更新时间
      */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField(value = "blog_updtime")
     private Date blogUpdtime;
 

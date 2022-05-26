@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BlogQuery {
     private String title;
-    private Long typeid;
-    private boolean recommend;
+    private Integer typeid;
+    private Boolean recommend;
 }

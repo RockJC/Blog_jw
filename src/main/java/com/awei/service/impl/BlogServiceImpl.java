@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * <p>
@@ -38,13 +39,13 @@ public class BlogServiceImpl implements IBlogService {
         QueryWrapper<Blog> queryWrapper = new QueryWrapper<>();
 
         if (blog.getTypeid()!=null){
-            queryWrapper.eq("type_id",blog.getTypeid());
+            queryWrapper.eq("blog_ref_typeid", blog.getTypeid());
         }
-        if (blog.isRecommend()){
-            queryWrapper.eq("recommend",blog.isRecommend());
+        if (blog.getRecommend()){
+            queryWrapper.eq("blog_recommend", blog.getRecommend());
         }
         if (StringUtils.hasText(blog.getTitle())){
-            queryWrapper.and(qw->qw.like("title",blog.getTitle()));
+            queryWrapper.and(qw->qw.like("blog_title", blog.getTitle()));
         }
 
         return blogMapper.BlogListPage(page,queryWrapper);
@@ -55,13 +56,13 @@ public class BlogServiceImpl implements IBlogService {
         System.out.println(blog.getBlogFlag());
         if (blog.getBlogFlag()==null||"".equals(blog.getBlogFlag())){blog.setBlogFlag("原创");}
         if (blog.getBlogId()==null){
-            blog.setBlogCretime(new Timestamp(System.currentTimeMillis()));
-            blog.setBlogUpdtime(new Timestamp(System.currentTimeMillis()));
+            blog.setBlogCretime(new Date(System.currentTimeMillis()));
+            blog.setBlogUpdtime(new Date(System.currentTimeMillis()));
             blog.setBlogViews(0);
             blogMapper.insert(blog);
             return 0;
         }else{
-            blog.setBlogUpdtime(new Timestamp(System.currentTimeMillis()));
+            blog.setBlogUpdtime(new Date(System.currentTimeMillis()));
             blogMapper.updateById(blog);
             return 1;
         }
