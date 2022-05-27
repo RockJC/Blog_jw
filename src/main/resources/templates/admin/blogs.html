@@ -50,12 +50,12 @@
             <input type="hidden" name="page">
             <div class="inline fields">
                 <div class="field">
-                    <input type="text" name="title" placeholder="标题">
+                    <input type="text" name="blogTitle" placeholder="标题">
                 </div>
                 <div class="field">
                     <div class="ui labeled action input">
                         <div class="ui seltype selection dropdown">
-                            <input type="hidden" name="typeid">
+                            <input type="hidden" name="typeId">
                             <i class="dropdown icon"></i>
                             <div class="default text">分类</div>
                             <div class="menu">
@@ -67,8 +67,8 @@
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="recommend" name="recommend">
-                        <label for="recommend">推荐</label>
+                        <input type="checkbox" id="blogRecommend" name="blogRecommend">
+                        <label for="blogRecommend">推荐</label>
                     </div>
                 </div>
                 <div class="field">
@@ -204,9 +204,9 @@
 
     function loaddata(){
         $("#table-container").load(/*[[@{/user/blogs/search}]]*/"/user/blogs/search",{
-            title : $("[name='title']").val(),
-            typeid : $("[name='typeid']").val(),
-            recommend : $("[name='recommend']").prop('checked'),
+            blogTitle : $("[name='blogTitle']").val(),
+            typeId : $("[name='typeId']").val(),
+            blogRecommend : $("[name='blogRecommend']").prop('checked'),
             page : $("[name='page']").val()
         });
     }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class BlogQuery {
-    private String title;
-    private Integer typeid;
-    private Boolean recommend;
+    private String blogTitle;
+    private Integer typeId;
+    private Boolean blogRecommend;
 }

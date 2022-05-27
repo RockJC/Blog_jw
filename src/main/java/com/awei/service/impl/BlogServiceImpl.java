@@ -36,24 +36,26 @@ public class BlogServiceImpl implements IBlogService {
     public Object listBlog(Integer num, BlogQuery blog) {
         Page<Blog> page = new Page<>(num,5);
 
+
+        if (blog == null){
+            return blogMapper.BlogListPage(page,null);
+        }
         QueryWrapper<Blog> queryWrapper = new QueryWrapper<>();
-
-        if (blog.getTypeid()!=null){
-            queryWrapper.eq("blog_ref_typeid", blog.getTypeid());
+        if (blog.getTypeId()!=null){
+            queryWrapper.eq("blog_ref_typeid", blog.getTypeId());
         }
-        if (blog.getRecommend()){
-            queryWrapper.eq("blog_recommend", blog.getRecommend());
+        if (blog.getBlogRecommend()!=null){
+            queryWrapper.eq("blog_recommend", blog.getBlogRecommend());
         }
-        if (StringUtils.hasText(blog.getTitle())){
-            queryWrapper.and(qw->qw.like("blog_title", blog.getTitle()));
+        if (StringUtils.hasText(blog.getBlogTitle())){
+            queryWrapper.and(qw->qw.like("blog_title", blog.getBlogTitle()));
         }
-
+        System.out.printf(String.valueOf(queryWrapper));
         return blogMapper.BlogListPage(page,queryWrapper);
     }
 
     @Override
     public Integer saveBlog(Blog blog) {
-        System.out.println(blog.getBlogFlag());
         if (blog.getBlogFlag()==null||"".equals(blog.getBlogFlag())){blog.setBlogFlag("原创");}
         if (blog.getBlogId()==null){
             blog.setBlogCretime(new Date(System.currentTimeMillis()));

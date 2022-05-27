@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -41,11 +42,12 @@ public class BlogController {
 
     @RequestMapping("/blogs")
     public ModelAndView blogs(@RequestParam(value = "page", required = false, defaultValue = "1") String num, BlogQuery blog,
-                       ModelAndView modelAndView){
-        if (num == null||num == "0") {
+                       ModelAndView modelAndView) {
+        if (num == null||"0".equals(num)) {
             num = "1";
         }
         int num1 = Integer.parseInt(num);
+        System.out.printf(blog.toString()+"1");
         modelAndView.addObject("types",typeService.listAllType());
         modelAndView.addObject("page",blogService.listBlog(num1,blog));
         modelAndView.setViewName("admin/blogs");
@@ -77,14 +79,9 @@ public class BlogController {
         modelAndView.addObject("types",typeService.listAllType());
         modelAndView.addObject("tags",tagService.listAllTag());
         Blog blog1 = blogService.getDetailBlog(id);
-        blog1.setBlogTitle(blogService.getBlogTitle(id));
-        List<Blogtag> blogtags = blog1.getBlogtags();
-        List<Tag> tagList = new ArrayList<>();
-        for (Blogtag bt : blogtags){
-            tagList.add(bt.getTag());
-        }
+//        blog1.setBlogTitle(blogService.getBlogTitle(id));
+        Set<Tag> tagList = blog1.getTags();
         blog1.init(tagList);
-        blog1.setBlogtags(null);
         modelAndView.addObject("blog",blog1);
         modelAndView.setViewName("admin/blogs-input");
         return modelAndView;
@@ -94,9 +91,7 @@ public class BlogController {
     public ModelAndView post(Blog blog, HttpSession session, RedirectAttributes attributes, ModelAndView modelAndView){
         User u1 = (User) session.getAttribute("user");
         blog.setUser_id(u1.getUserId());
-        blog.setType_id(blog.getType().getTypeId());
         List<Integer> longs = tagService.listTagById(blog.getTagIds());
-        System.out.println(longs);
         int i;
         if (blogService.saveBlog(blog)==0){
             i = blogTagService.insertListTags(blog.getBlogId(), longs);

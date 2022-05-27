@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -134,7 +136,7 @@ public class Blog implements Serializable {
     private User user;
 
     @TableField(exist = false)
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
     @TableField(exist = false)
     private List<Blogtag> blogtags;
@@ -142,12 +144,12 @@ public class Blog implements Serializable {
     @TableField(exist = false)
     private String TagIds;
 
-    public void init(List<Tag> tags){
+    public void init(Set<Tag> tags){
 //        this.tags = tags;
         this.TagIds = tagsToIds(tags);
     }
 
-    private String tagsToIds(List<Tag> tags){
+    private String tagsToIds(Set<Tag> tags){
         if (!tags.isEmpty()){
             StringBuffer ids = new StringBuffer();
             boolean flag = false;

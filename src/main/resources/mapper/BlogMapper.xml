@@ -14,13 +14,13 @@
     </select>
     <select id="BlogUpdateDetail" resultMap="BlogAllMap">
         select
-            b.blog_id,b.blog_appreciation,b.blog_commentabled,b.blog_content,b.blog_descri,
+            b.blog_id,b.blog_title,b.blog_appreciation,b.blog_commentabled,b.blog_content,b.blog_descri,
             b.blog_firstpic,b.blog_flag,b.blog_recommend,b.blog_statement,
             b.blog_updtime,b.blog_views,b.blog_ref_typeid,b.blog_ref_userid,d.type_id,d.type_name,c.tag_id,c.tag_name
         from
             (t_blog b
             inner JOIN t_type d ON b.blog_ref_typeid = d.type_id)
-            inner JOIN t_blogtag a ON b.blog_id = a.ref_blog_id
+            LEFT JOIN t_blogtag a ON b.blog_id = a.ref_blog_id
             LEFT JOIN t_tag c ON c.tag_id = a.ref_tag_id
             where b.blog_id = #{id}
     </select>
@@ -44,61 +44,60 @@
         ORDER BY b.blog_updtime DESC
     </select>
     <resultMap id="BlogResultMap" type="com.awei.entity.Blog">
-        <id property="blogId" column="blog_id"/>
-        <result property="blogTitle" column="blog_title"/>
-        <result property="blogRecommend" column="blog_recommend"/>
-        <result property="blogPublished" column="blog_published"/>
-        <result property="blogUpdtime" column="blog_updtime"/>
-        <result property="type_id" column="blog_ref_typeid"/>
+        <id property="blogId" column="blog_id" jdbcType="BIGINT"/>
+        <result property="blogTitle" column="blog_title" jdbcType="VARCHAR"/>
+        <result property="blogRecommend" column="blog_recommend" jdbcType="BIT"/>
+        <result property="blogPublished" column="blog_published" jdbcType="BIT"/>
+        <result property="blogUpdtime" column="blog_updtime" jdbcType="TIMESTAMP"/>
+        <result property="type_id" column="blog_ref_typeid" jdbcType="INTEGER"/>
         <association property="type" javaType="com.awei.entity.Type">
-            <id property="typeId" column="type_id"/>
-            <result property="typeName" column="type_name"/>
+            <id property="typeId" column="type_id" jdbcType="INTEGER"/>
+            <result property="typeName" column="type_name" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
     <resultMap id="BlogAllMap" type="com.awei.entity.Blog">
-        <id property="blogId" column="blog_id"/>
-        <result property="blogAppreciation" column="blog_appreciation"/>
-        <result property="blogCommentabled" column="blog_commentabled"/>
-        <result property="blogContent" column="blog_content"/>
-        <result property="blogDescri" column="blog_descri"/>
-        <result property="blogFirstpic" column="blog_firstpic"/>
-        <result property="blogFlag" column="blog_flag"/>
-        <result property="blogRecommend" column="blog_recommend"/>
-        <result property="blogStatement" column="blog_statement"/>
-        <result property="blogUpdtime" column="blog_updtime"/>
-        <result property="blogViews" column="blog_views"/>
-        <result property="type_id" column="blog_ref_typeid"/>
-        <result property="user_id" column="blog_ref_userid"/>
+        <id property="blogId" column="blog_id" jdbcType="BIGINT"/>
+        <result property="blogTitle" column="blog_title" jdbcType="VARCHAR"/>
+        <result property="blogAppreciation" column="blog_appreciation" jdbcType="BIT"/>
+        <result property="blogCommentabled" column="blog_commentabled" jdbcType="BIT"/>
+        <result property="blogContent" column="blog_content" jdbcType="VARCHAR"/>
+        <result property="blogDescri" column="blog_descri" jdbcType="VARCHAR"/>
+        <result property="blogFirstpic" column="blog_firstpic" jdbcType="VARCHAR"/>
+        <result property="blogFlag" column="blog_flag" jdbcType="VARCHAR"/>
+        <result property="blogRecommend" column="blog_recommend" jdbcType="BIT"/>
+        <result property="blogStatement" column="blog_statement" jdbcType="BIT"/>
+        <result property="blogUpdtime" column="blog_updtime" jdbcType="TIMESTAMP"/>
+        <result property="blogViews" column="blog_views" jdbcType="INTEGER"/>
+        <result property="type_id" column="blog_ref_typeid" jdbcType="INTEGER"/>
+        <result property="user_id" column="blog_ref_userid" jdbcType="TINYINT"/>
         <association property="type" javaType="com.awei.entity.Type">
-            <id property="typeId" column="type_id"/>
-            <result property="typeName" column="type_name"/>
+            <id property="typeId" column="type_id" jdbcType="INTEGER"/>
+            <result property="typeName" column="type_name" jdbcType="VARCHAR"/>
         </association>
-        <collection property="blogtags" ofType="com.awei.entity.Blogtag">
-            <association property="tag" javaType="com.awei.entity.Tag">
-                <id property="tagId" column="tag_id"/>
-                <result property="tagName" column="tag_name"/>
-            </association>
+        <collection property="tags" ofType="com.awei.entity.Tag">
+                <id property="tagId" column="tag_id" jdbcType="INTEGER"/>
+                <result property="tagName" column="tag_name" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
     <resultMap id="BlogIndexMap" type="com.awei.entity.Blog">
-        <id property="blogId" column="blog_id"/>
-        <result property="blogTitle" column="blog_title"/>
-        <result property="blogDescri" column="blog_descri"/>
-        <result property="blogFirstpic" column="blog_firstpic"/>
-        <result property="blogFlag" column="blog_flag"/>
-        <result property="blogPublished" column="blog_published"/>
-        <result property="blogRecommend" column="blog_recommend"/>
-        <result property="blogUpdtime" column="blog_updtime"/>
-        <result property="blogViews" column="blog_views"/>
-        <result property="type_id" column="blog_ref_typeid"/>
+        <id property="blogId" column="blog_id" jdbcType="BIGINT"/>
+        <result property="blogTitle" column="blog_title" jdbcType="VARCHAR"/>
+        <result property="blogDescri" column="blog_descri" jdbcType="VARCHAR"/>
+        <result property="blogFirstpic" column="blog_firstpic" jdbcType="VARCHAR"/>
+        <result property="blogFlag" column="blog_flag" jdbcType="VARCHAR"/>
+        <result property="blogPublished" column="blog_published" jdbcType="BIT"/>
+        <result property="blogRecommend" column="blog_recommend" jdbcType="BIT"/>
+        <result property="blogUpdtime" column="blog_updtime" jdbcType="TIMESTAMP"/>
+        <result property="blogViews" column="blog_views" jdbcType="INTEGER"/>
+        <result property="type_id" column="blog_ref_typeid" jdbcType="INTEGER"/>
         <association property="type" javaType="com.awei.entity.Type">
-            <id property="typeId" column="type_id"/>
-            <result property="typeName" column="type_name"/>
+            <id property="typeId" column="type_id" jdbcType="INTEGER"/>
+            <result property="typeName" column="type_name" jdbcType="VARCHAR"/>
         </association>
         <association property="user" javaType="com.awei.entity.User">
-            <id property="userId" column="user_id"/>
-            <result property="userAvatar" column="user_avatar"/>
-            <result property="userNickname" column="user_nickname"/>
+            <id property="userId" column="user_id" jdbcType="TINYINT"/>
+            <result property="userAvatar" column="user_avatar" jdbcType="VARCHAR"/>
+            <result property="userNickname" column="user_nickname" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
 </mapper>

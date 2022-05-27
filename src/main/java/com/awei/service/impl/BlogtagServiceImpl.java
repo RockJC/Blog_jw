@@ -39,7 +39,7 @@ public class BlogtagServiceImpl implements IBlogtagService {
     @Override
     public int updateListByBlogId(Long blogsid,List<Integer> tagsIds) {
         QueryWrapper queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("blog_id",blogsid);
+        queryWrapper.eq("ref_blog_id",blogsid);
         blogTagMapper.delete(queryWrapper);
 
         return this.insertListTags(blogsid,tagsIds);
