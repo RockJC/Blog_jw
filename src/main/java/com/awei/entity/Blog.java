@@ -117,13 +117,11 @@ public class Blog implements Serializable {
     @TableField(value = "blog_views")
     private Integer blogViews;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 
-    @TableField("blog_ref_typeid")
+    @TableField(value = "blog_ref_typeid")
     private Integer type_id;
 
-    @TableField("blog_ref_userid")
+    @TableField(value = "blog_ref_userid")
     private Short user_id;
 
     @TableField(exist = false)
@@ -143,6 +141,9 @@ public class Blog implements Serializable {
 
     @TableField(exist = false)
     private String TagIds;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
     public void init(Set<Tag> tags){
 //        this.tags = tags;
