@@ -7,7 +7,7 @@
             b.blog_id, b.blog_title, b.blog_recommend, b.blog_published, b.blog_updtime, b.blog_ref_typeid, t.type_id, t.type_name
         FROM
             t_blog b
-            inner JOIN t_type t ON b.blog_ref_typeid = t.type_id
+            LEFT JOIN t_type t ON b.blog_ref_typeid = t.type_id
         <if test="ew !=null">
             ${ew.customSqlSegment}
         </if>
@@ -19,7 +19,7 @@
             b.blog_updtime,b.blog_views,b.blog_ref_typeid,b.blog_ref_userid,d.type_id,d.type_name,c.tag_id,c.tag_name
         from
             (t_blog b
-            inner JOIN t_type d ON b.blog_ref_typeid = d.type_id)
+            LEFT JOIN t_type d ON b.blog_ref_typeid = d.type_id)
             LEFT JOIN t_blogtag a ON b.blog_id = a.ref_blog_id
             LEFT JOIN t_tag c ON c.tag_id = a.ref_tag_id
             where b.blog_id = #{id}
@@ -31,8 +31,8 @@
             u.user_id, u.user_avatar, u.user_nickname
         FROM
             t_blog b
-            inner JOIN t_type t ON b.blog_ref_typeid = t.type_id
-            inner JOIN t_user u ON b.blog_ref_userid = u.user_id
+            LEFT JOIN t_type t ON b.blog_ref_typeid = t.type_id
+            LEFT JOIN t_user u ON b.blog_ref_userid = u.user_id
         <if test="ew !=null">
                 ${ew.customSqlSegment}
         </if>
