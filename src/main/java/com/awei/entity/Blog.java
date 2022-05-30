@@ -45,13 +45,13 @@ public class Blog implements Serializable {
      * 是否开启点赞
      */
     @TableField(value = "blog_appreciation")
-    private Boolean blogAppreciation;
+    private boolean blogAppreciation;
 
     /**
      * 是否开启评论
      */
     @TableField(value = "blog_commentabled")
-    private Boolean blogCommentabled;
+    private boolean blogCommentabled;
 
     /**
      * 文章内容
@@ -89,19 +89,19 @@ public class Blog implements Serializable {
      * 是否已发布
      */
     @TableField(value = "blog_published")
-    private Boolean blogPublished;
+    private boolean blogPublished;
 
     /**
      * 是否推荐
      */
     @TableField(value = "blog_recommend")
-    private Boolean blogRecommend;
+    private boolean blogRecommend;
 
     /**
      * 转载状态
      */
     @TableField(value = "blog_statement")
-    private Boolean blogStatement;
+    private boolean blogStatement;
 
     /**
      * 更新时间

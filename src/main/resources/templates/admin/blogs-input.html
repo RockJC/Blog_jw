@@ -53,7 +53,7 @@
             <div class="required field">
                 <div class="ui left labeled input">
                     <div class="ui selection compact teal basic dropdown label">
-                        <input type="hidden" value="原创" name="flag" th:value="*{blogFlag}">
+                        <input type="hidden" value="原创" name="blogFlag" th:value="*{blogFlag}">
                         <i class="dropdown icon"></i>
                         <div class="text">原创</div>
                         <div class="menu">
@@ -110,25 +110,25 @@
             <div class="inline fields">
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="blogRecommend" name="blogRecommend" checked th:check="*{blogRecommend}" class="hidden">
+                        <input type="checkbox" id="blogRecommend" name="blogRecommend" th:checked="*{blogRecommend}" class="hidden">
                         <label for="blogRecommend">推荐</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="blogStatement" name="blogStatement" checked th:check="*{blogStatement}" class="hidden">
+                        <input type="checkbox" id="blogStatement" name="blogStatement" th:checked="*{blogStatement}" class="hidden">
                         <label for="blogStatement">转载声明</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="blogAppreciation" name="blogAppreciation" checked th:check="*{blogAppreciation}" class="hidden">
+                        <input type="checkbox" id="blogAppreciation" name="blogAppreciation" th:checked="*{blogAppreciation}" class="hidden">
                         <label for="blogAppreciation">赞赏</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="blogCommentabled" name="blogCommentabled" checked th:check="*{blogCommentabled}" class="hidden">
+                        <input type="checkbox" id="blogCommentabled" name="blogCommentabled" th:checked="*{blogCommentabled}" class="hidden">
                         <label for="blogCommentabled">评论</label>
                     </div>
                 </div>
@@ -234,7 +234,6 @@
         $('[name="blogPublished"]').val(true);
         $('#blog-form').submit();
     });
-
     $('.ui.form').form({
        fields :{
            blogTitle : {

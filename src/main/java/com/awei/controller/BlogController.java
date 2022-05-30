@@ -98,6 +98,7 @@ public class BlogController {
         }else {
             i = blogTagService.updateListByBlogId(blog.getBlogId(), longs);
         }
+        System.out.printf("************"+String.valueOf(blog.isBlogAppreciation()));
         if (i < 1){
             attributes.addFlashAttribute("message","操作失败");
         }else {
