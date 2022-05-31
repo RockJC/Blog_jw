@@ -12,3 +12,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: false
   type-aliases-package: com.awei.entity
+
+jwt:
+  key: qunlijwt=
+  expiration: 5000
