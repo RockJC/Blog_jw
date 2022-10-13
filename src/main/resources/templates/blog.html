@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客详情</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
-    <link rel="stylesheet" href="../static/css/prism.css" th:href="@{/css/prism.css}">
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
-    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="/static/css/animate.css" th:href="@{/static/css/animate.css}">
+    <link rel="stylesheet" href="/static/css/typo.css" th:href="@{/static/css/typo.css}">
+    <link rel="stylesheet" href="/static/css/prism.css" th:href="@{/static/css/prism.css}">
+    <link rel="stylesheet" href="/static/lib/tocbot/tocbot.css" th:href="@{/static/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="/static/css/me.css" th:href="@{/static/css/me.css}">
 </head>
 <body>
 <!--导航-->
@@ -42,31 +42,31 @@
         <div class="ui top attached segment">
             <div class="ui horizontal link list">
                 <div class="item  animate__animated animate__backInLeft">
-                    <img src="https://picsum.photos/id/1006/100/100" th:src="@{${user.avatar}}" alt=""
+                    <img src="https://picsum.photos/id/1006/100/100" th:src="@{${user.userAvatar}}" alt=""
                          class="ui avatar image">
-                    <div class="content"><a href="#" class="header"  th:text="${user.nickname}">jiangwei</a></div>
+                    <div class="content"><a href="#" class="header"  th:text="${user.userNickname}">jiangwei</a></div>
                 </div>
                 <div class="item">
                     <i class="calendar icon"></i><span
-                        th:text="${#dates.format(blogs.update_time,'yyyy-MM-dd')}">2022-4-27</span>
+                        th:text="${#dates.format(blogs.blogUpdtime,'yyyy-MM-dd')}">2022-4-27</span>
                 </div>
                 <div class="item">
-                    <i class="eye icon"></i><span th:text="${blogs.views}">234</span>
+                    <i class="eye icon"></i><span th:text="${blogs.blogViews}">234</span>
                 </div>
             </div>
         </div>
         <div class="ui attached segment">
-            <img src="https://picsum.photos/id/1006/800/450" th:src="@{${blogs.firstPicture}}"
+            <img src="https://picsum.photos/id/1006/800/450" th:src="@{${blogs.blogFirstpic}}"
                  class="ui fluid rounded image animate__animated animate__fadeInLeftBig">
         </div>
         <div class="ui attached padded segment">
             <!--        内容-->
             <div class="ui right aligned basic segment">
-                <div class="ui green basic label" th:text="${blogs.flag}">原创</div>
+                <div class="ui green basic label" th:text="${blogs.blogFlag}">原创</div>
             </div>
-            <h2 class="ui center aligned header" th:text="${blogs.title}">不知道写点什么</h2>
+            <h2 class="ui center aligned header" th:text="${blogs.blogTitle}">不知道写点什么</h2>
 
-            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:utext="${blogs.content}">
+            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:text="${blogs.blogContent}">
 
                 <h2 id="section1">一、关于 <i class="serif">Typo.css</i></h2>
                 <pre><code class="language-css">p { color: red}</code> </pre>
@@ -456,7 +456,7 @@ h5,h6{font-size:1em;}
             </div>
             <!--        标签-->
             <div class="m-padded-lr">
-                <div class="ui basic teal left pointing label" th:each="tag : ${blogs.tags}" th:text="${tag.name}">方法</div>
+                <div class="ui basic teal left pointing label" th:each="tag : ${blogs.tags}" th:text="${tag.tagName}">方法</div>
             </div>
             <!--        赞赏-->
             <div class="ui center aligned basic segment">
@@ -484,8 +484,8 @@ h5,h6{font-size:1em;}
             <div class="ui grid">
                 <div class="eleven wide column">
                     <ul>
-                        <li>作者：<span th:text="${user.nickname}">姜伟</span><a href="#" th:href="@{/about}" target="_blank">(联系作者)</a></li>
-                        <li>发表时间：<span th:text="${#dates.format(blogs.update_time,'yyyy-MM-dd HH:mm')}">2022-4-27 14:44</span></li>
+                        <li>作者：<span th:text="${user.userNickname}">姜伟</span><a href="#" th:href="@{/about}" target="_blank">(联系作者)</a></li>
+                        <li>发表时间：<span th:text="${#dates.format(blogs.blogUpdtime,'yyyy-MM-dd HH:mm')}">2022-4-27 14:44</span></li>
                         <li>版权声明：自由转载-非商用</li>
                         <li>转载：请在文末添加作者二维码</li>
                     </ul>
@@ -570,23 +570,23 @@ h5,h6{font-size:1em;}
                 </div>
             </div>
             <div id="comment-form" class="ui form">
-                <input type="hidden" name="blog_id" th:value="${blogs.id}">
-                <input type="hidden" name="parentComment.id" value="-1">
+                <input type="hidden" name="blog_id" th:value="${blogs.blogId}">
+                <input type="hidden" name="parentComment.commentId" value="-1">
                 <div class="field">
-                    <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                    <textarea name="commentContent" placeholder="请输入评论信息..."></textarea>
                 </div>
                 <div class="fields">
                     <div class="field m-mobile-wide m-margin-bottom-small">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="nickname" placeholder="姓名">
+                            <input type="text" name="commentNickname" placeholder="姓名">
                         </div>
                     </div>
 
                     <div class="field m-mobile-wide m-margin-bottom-small">
                         <div class="ui left icon input">
                             <i class="mail icon"></i>
-                            <input type="text" name="email" placeholder="邮箱">
+                            <input type="text" name="commentEmail" placeholder="邮箱">
                         </div>
                     </div>
                     <div class="field  m-margin-bottom-small m-mobile-wide">
@@ -704,7 +704,7 @@ h5,h6{font-size:1em;}
     });
 
     var serurl = "127.0.0.1:8080";
-    var url = /*[[@{/blog/{id}(id=${blogs.id})}]]*/"";
+    var url = /*[[@{/blog/{id}(id=${blogs.blogId})}]]*/"";
     var qrcode = new QRCode("qrcode", {
         text: serurl+url,
         width: 110,
@@ -770,11 +770,11 @@ h5,h6{font-size:1em;}
 
     function post(){
         $("#comment-container").load(/*[[@{/comments}]]*/"",{
-            "parentComment.id" : $("[name='parentComment.id']").val(),
-            "blog.id" : $("[name='blogs.id']").val(),
-            "nickname" : $("[name='nickname']").val(),
-            "email" : $("[name='email']").val(),
-            "content" : $("[name='content']").val()
+            "parentComment.commentId" : $("[name='parentComment.commentId']").val(),
+            "commentBlogid" : $("[name='blogs.blogId']").val(),
+            "commentNickname" : $("[name='commentNickname']").val(),
+            "commentEmail" : $("[name='commentEmail']").val(),
+            "commentContent" : $("[name='commentContent']").val()
         },function (responseTxt, statuxTxt, xhr){
             $(window).scrollTo($('#comment-container'),500);
             clearContent();
@@ -782,16 +782,16 @@ h5,h6{font-size:1em;}
     }
 
     function clearContent(){
-        $("[name='content']").val('');
-        $("[name='parentComment.id']").val(-1);
-        $("[name='content']").attr("placeholder","请输入评论信息...");
+        $("[name='commentContent']").val('');
+        $("[name='parentComment.commentId']").val(-1);
+        $("[name='commentContent']").attr("placeholder","请输入评论信息...");
 
     }
     function reply(obj) {
-        var commentId = $(obj).data('commentid');
-        var commentNickname = $(obj).data('commentnickname');
-        $("[name='content']").attr("placeholder","@"+commentNickname).focus();
-        $("[name='parentComment.id']").val(commentId);
+        var commentId = $(obj).data('commentId');
+        var commentNickname = $(obj).data('commentNickname');
+        $("[name='commentContent']").attr("placeholder","@"+commentNickname).focus();
+        $("[name='parentComment.commentId']").val(commentId);
         $(window).scrollTo($('#comment-form'),500);
     }
 </script>
