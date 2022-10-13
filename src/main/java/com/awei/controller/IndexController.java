@@ -59,10 +59,10 @@ public class IndexController {
 
     @RequestMapping("/blog/{id}")
     public ModelAndView blog(@PathVariable Long id,ModelAndView modelAndView){
-        Blog blog1 = blogService.getAndConveryBlog(id);
-        modelAndView.addObject("blogs",blog1);
-        System.out.println(blog1.getUser_id());
-        modelAndView.addObject("user",userService.getUserById(blog1.getUser_id()));
+        Blog blogs = blogService.getAndConveryBlog(id);
+        modelAndView.addObject("blogs",blogs);
+        System.out.println(blogs.getUser_id());
+        modelAndView.addObject("user",userService.getUserById(blogs.getUser_id()));
         modelAndView.setViewName("blog");
         return modelAndView;
     }
