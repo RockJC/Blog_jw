@@ -66,7 +66,7 @@
             </div>
             <h2 class="ui center aligned header" th:text="${blogs.blogTitle}">不知道写点什么</h2>
 
-            <div id="wrapper" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:text="${blogs.blogContent}">
+            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:utext="${blogs.blogContent}">
 
                 <h1>中文网页重设与排版：<i class="serif">Typo.css</i></h1><br/>
 
