@@ -49,7 +49,7 @@ public class IndexController {
         }
         int num1 = Integer.parseInt(num);
         QueryWrapper<Blog> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("title",query).or().like("content",query).or().like("description",query);
+        queryWrapper.like("blog_title",query).or().like("blog_content",query).or().like("blog_descri",query);
         modelAndView.addObject("page",blogService.listIndexBlog(num1,queryWrapper));
         modelAndView.addObject("query",query);
         modelAndView.setViewName("search");
